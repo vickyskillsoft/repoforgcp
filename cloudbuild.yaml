@@ -4,9 +4,11 @@ steps:
     args:
       - '-c'
       - |
+        set -euxo pipefail
         echo "Starting App Engine Deployment"
         gcloud config set project cgt-dev-471517
         gcloud app deploy app.yaml \
+          --verbosity=debug \
           --quiet \
           --no-promote \
           --version=v1-$(date +%s)
