@@ -1,7 +1,17 @@
 steps:
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
-    args: ['app', 'deploy', 'app.yaml', '--quiet']
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        echo "Listing workspace files"
+        ls -la
+        echo "----- app.yaml -----"
+        cat app.yaml
+        echo "----- requirements.txt -----"
+        cat requirements.txt
+        echo "Starting App Engine deploy"
+        gcloud app deploy app.yaml --verbosity=debug --project=cgt-dev-471517 --quiet
 
 options:
   logging: CLOUD_LOGGING_ONLY
